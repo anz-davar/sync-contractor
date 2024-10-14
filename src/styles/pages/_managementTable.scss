@@ -1,0 +1,63 @@
+.contractor-main-container{
+    display: flex;
+   justify-content: flex-start; 
+   align-items: flex-start;
+   margin: 0 10px;
+
+   .info-headers-container{
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+    padding: 10px;
+    border: 5px solid gray;
+    margin: 0 0 10px 0;
+    border-radius: 10px;
+    
+    .info-header-set{
+        display: flex;
+        height: 30px;
+        flex-direction: row;
+        margin: 0 0 10px 0;
+    }
+
+    .info-header-style{
+        font-size: 20px;
+        font-weight: 400;
+        text-decoration: underline;
+        margin: 0 0 0 20px;
+    }
+    .info-item-style{
+        font-size: 20px;
+    }
+   }
+.data-table{
+    margin: 10px 0;
+}
+
+
+
+   .contractor-table{
+    align-items:right;
+    justify-content: right; 
+
+}
+.table-main-header{
+    align-self: flex-end;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 35px;
+    direction: rtl;
+}
+.container{
+    display: grid;
+    direction: rtl;
+    border: 5px yellow dashed;
+    margin: 0 20px 30px  20px;
+    
+    .header-style{
+        margin: 0 0 0 10px;
+        font-size: 21px;
+        
+    }
+}
+}

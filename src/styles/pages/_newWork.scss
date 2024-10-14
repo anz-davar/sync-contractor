@@ -1,0 +1,28 @@
+.new-main-container{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: flex-start;
+    
+    .new-cul-container{
+        display: flex;
+        flex-direction: column;
+        margin: 0 0 10px 20px
+    }
+    
+    .new-sub-container{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .new-row-container{
+        display: flex;
+        flex-direction: row;
+        margin: 0 0 10px 20px
+    }
+
+    .new-sub-header{
+        font-weight: 600;
+        text-decoration: underline;
+    }
+}

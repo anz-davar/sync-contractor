@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+}
+
+::selection {
+    background-color: gray;
+    color: #fff;
+    opacity: 0.9;
+}
+
+html {
+    font-family: montserrat, sans-serif;
+    font-size: 18px;
+    color: black;
+    line-height: 1.6;
+    direction: rtl;
+}
+
+a{
+    color: wheat;
+    text-decoration: none;
+    :active{
+        color: wheat;
+        border: 0;
+        text-decoration: none;
+    }
+}
+
+body {
+    margin: 0;
+    background-color: lightgray;
+    color: black;
+}
+
+img {
+    width: 100%;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: rubic, Helvetica, sans-serif;
+    font-weight: normal;
+    line-height: 1;
+    margin: 0 0 0.6em;
+}
+
+h1 {
+    font-size: 65px;
+}
+
+
+
+p {
+    font-family: rubic, Helvetica, sans-serif;
+}
