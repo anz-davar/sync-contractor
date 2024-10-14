@@ -10,7 +10,7 @@
     "directorId": "1",
     "contractorId": "2",
     "facilityNum": 45,
-    "locationName": "הפסל של אטלן",
+    "locationName": "משאבות משניות 2",
     "sections": [
         {
             "id":"105",
@@ -61,7 +61,7 @@
     "directorId": "1",
     "contractorId": "2",
     "facilityNum": 45,
-    "locationName": "אגם הברבורים",
+    "locationName": "משאבות משניות 2",
     "sections": [{
         "id":"101",
         "section": 1,
@@ -105,7 +105,7 @@
         "directorId": "1",
         "contractorId": "3",
         "facilityNum": 80,
-        "locationName": "פינת הגרגלך",
+        "locationName": "משרדים 12",
         "sections": [{
             "id":"107",
             "section": 1,
