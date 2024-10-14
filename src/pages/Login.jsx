@@ -15,9 +15,9 @@ export const Login = () => {
             <input id="password-input" type="password" className="login-input" />
         </div>
 
-        <button>היכנס</button>
+        <button className="login-btn">היכנס</button>
 
-            <h4 className="login-forgot-password">שכחתי סיסמא</h4>
+            <button className="login-forgot-password">שכחתי סיסמא</button>
 
         </form>
 }
