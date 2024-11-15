@@ -1,63 +1,106 @@
-.contractor-main-container{
+.contractor-main-container {
     display: flex;
-   justify-content: flex-start; 
-   align-items: flex-start;
-   margin: 0 10px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0 10px;
 
-   .info-headers-container{
-    display: flex;
-    flex-direction: column;
-    background-color: antiquewhite;
-    padding: 10px;
-    border: 5px solid gray;
-    margin: 0 0 10px 0;
-    border-radius: 10px;
-    
-    .info-header-set{
+    .add-work-container {
         display: flex;
-        height: 30px;
         flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+
+        .add-work-btn {
+            height: 40px;
+            color: black;
+            font-weight: 600;
+            background: transparent;
+            border: transparent;
+            font-size: 20px;
+            align-content: center;
+
+            :hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .info-headers-container {
+        display: flex;
+        flex-direction: column;
+        background-color: antiquewhite;
+        padding: 10px;
+        border: 5px solid gray;
         margin: 0 0 10px 0;
+        border-radius: 10px;
+
+        .info-header-set {
+            display: flex;
+            height: 30px;
+            flex-direction: row;
+            margin: 0 0 10px 0;
+        }
+
+        .info-header-style {
+            font-size: 20px;
+            font-weight: 400;
+            text-decoration: underline;
+            margin: 0 0 0 20px;
+        }
+
+        .info-item-style {
+            font-size: 20px;
+        }
     }
 
-    .info-header-style{
-        font-size: 20px;
-        font-weight: 400;
+    .data-table {
+        margin: 10px 0;
+    }
+
+
+
+    .contractor-table {
+        align-items: right;
+        justify-content: right;
+
+    }
+
+    .table-main-header {
+        align-self: flex-end;
         text-decoration: underline;
-        margin: 0 0 0 20px;
+        font-weight: bold;
+        font-size: 35px;
+        direction: rtl;
     }
-    .info-item-style{
-        font-size: 20px;
+
+    .container {
+        display: grid;
+        direction: rtl;
+        border: 5px yellow dashed;
+        margin: 0 20px 30px 20px;
+
+        .header-style {
+            margin: 0 0 0 10px;
+            font-size: 21px;
+
+        }
     }
-   }
-.data-table{
-    margin: 10px 0;
+
+    .add-work-popup {
+        visibility: visible;
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background: gray;
+        opacity: 90%;
+
+
+    }
+
 }
 
-
-
-   .contractor-table{
-    align-items:right;
-    justify-content: right; 
-
-}
-.table-main-header{
-    align-self: flex-end;
+.new-mini-sub-header {
     text-decoration: underline;
-    font-weight: bold;
-    font-size: 35px;
-    direction: rtl;
-}
-.container{
-    display: grid;
-    direction: rtl;
-    border: 5px yellow dashed;
-    margin: 0 20px 30px  20px;
-    
-    .header-style{
-        margin: 0 0 0 10px;
-        font-size: 21px;
-        
-    }
-}
+    font-weight: 500;
+    margin: 0 0 0 10px;
 }
