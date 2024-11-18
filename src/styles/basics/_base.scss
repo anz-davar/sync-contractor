@@ -3,7 +3,7 @@
 }
 
 ::selection {
-    background-color: gray;
+    background: linear-gradient(107deg, #ba7c36 9%, #a8a4a4 100%);
     color: #fff;
     opacity: 0.9;
 }
@@ -16,10 +16,11 @@ html {
     direction: rtl;
 }
 
-a{
+a {
     color: wheat;
     text-decoration: none;
-    :active{
+
+    :active {
         color: wheat;
         border: 0;
         text-decoration: none;
@@ -28,7 +29,7 @@ a{
 
 body {
     margin: 0;
-    background-color: lightgray;
+    background: linear-gradient(107deg, #ba7c36 9%, #a8a4a4 100%);
     color: black;
 }
 
@@ -36,19 +37,79 @@ img {
     width: 100%;
 }
 
-h1,h2,h3,h4,h5,h6 {
-    font-family: rubic, Helvetica, sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'rubik', Arial, sans-serif;
     font-weight: normal;
     line-height: 1;
     margin: 0 0 0.6em;
 }
 
 h1 {
-    font-size: 65px;
+    font-size: 2.5em;
+    font-weight: 800;
+}
+
+h2 {
+    font-size: 2em;
 }
 
 
 
 p {
-    font-family: rubic, Helvetica, sans-serif;
+    font-family: 'rubik', Arial, sans-serif;
+}
+
+label {
+    margin: 0 0 0 10px;
+}
+
+input {
+    background: rgba(255, 153, 0, 0.103);
+    border: #746e6e 1px solid;
+    border-radius: 7px;
+    margin: 0 0 0 10px;
+
+    :hover {
+        background: rgba(255, 153, 0, 0.481);
+        border: #746e6e 1px solid;
+    }
+
+    :focus-visible {
+        background: orange;
+        border: #746e6e 1px solid;
+    }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+select {
+    background: rgba(214, 131, 6, 0.347);
+    border: #c28905 1px solid;
+    border-radius: 7px;
+}
+
+
+button {
+    background: rgba(10, 132, 93, 0.445);
+    border-radius: 3px;
+    border: rgb(3, 105, 22) 2px double;
+    padding: 5px;
+    margin: 5px 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #342501;
+
+    :hover {
+        cursor: pointer;
+        background: rgba(10, 132, 93, 0.813);
+    }
 }
