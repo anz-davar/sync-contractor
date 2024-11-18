@@ -11,9 +11,11 @@
 html {
     font-family: montserrat, sans-serif;
     font-size: 18px;
+    background: #ba7c366c;
     color: black;
     line-height: 1.6;
     direction: rtl;
+    height: 100%;
 }
 
 a {
@@ -28,6 +30,7 @@ a {
 }
 
 body {
+    height: 100%;
     margin: 0;
     background: linear-gradient(107deg, #ba7c36 9%, #a8a4a4 100%);
     color: black;
@@ -74,12 +77,12 @@ input {
     border-radius: 7px;
     margin: 0 0 0 10px;
 
-    :hover {
+    &:hover {
         background: rgba(255, 153, 0, 0.481);
         border: #746e6e 1px solid;
     }
 
-    :focus-visible {
+    &:focus-visible {
         background: orange;
         border: #746e6e 1px solid;
     }
@@ -108,7 +111,7 @@ button {
     font-weight: 600;
     color: #342501;
 
-    :hover {
+    &:hover {
         cursor: pointer;
         background: rgba(10, 132, 93, 0.813);
     }
