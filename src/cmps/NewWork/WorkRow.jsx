@@ -24,7 +24,7 @@ export const WorkRow = ({ row, removeRow }) => {
                 <FaTrash />
             </button>
 
-            <div className="new-row-container ">
+            <div className="new-row-container section-item">
                 <label htmlFor="new-content" className="new-sub-header"> מהות העבודה</label>
                 <select onChange={(e) => onChange(e)} id="new-content" className="new-sub-select">
                     <option value="one">החלפת צנרת במשאבת בורג</option>
@@ -32,7 +32,8 @@ export const WorkRow = ({ row, removeRow }) => {
                     <option value="three">בניית פסל לגרגלך הראשי</option>
                 </select>
             </div>
-            <div className="new-row-container">
+
+            <div className="new-row-container section-item">
                 <label htmlFor="new-amount" className="new-sub-header">כמות</label>
                 <input className="int-input" onChange={(e) => onChange(e)} type="number" id="new-amount" />
                 <select onChange={(e) => setType(e.target.value)} className="new-count-select">
@@ -40,7 +41,7 @@ export const WorkRow = ({ row, removeRow }) => {
                     <option value="מטר">מטר</option>
                 </select>
             </div>
-            <div className="new-row-container">
+            <div className="new-row-container section-item">
                 <label htmlFor="new-cost" className="new-sub-header">עלות ל{type} בש"ח</label>
                 <input className="int-input" onChange={(e) => onChange(e)} min={0} type="number" id="new-cost" />
             </div>

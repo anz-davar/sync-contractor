@@ -65,19 +65,24 @@ export const NewWorkModal = ({ isOpen, closeModal }) => {
                 removeRow={(sectionId) => removeSection(sectionId)}
                 workRows={sections} />
 
-            <div className="new-row-container">
-                <div className="new-cul-container">
+            <div className="new-cul-container">
+                <label className="new-sub-header" htmlFor="new-notes-textarea">הערות</label>
+                <textarea id="new-notes-textarea"></textarea>
+            </div>
+
+            <div className="new-row-container details-row">
+                <div className="new-cul-container details-container">
                     <h4 className="new-sub-header">סה"כ עלות לעבודה</h4>
                     <h4 >300 ₪</h4>
                 </div>
-                <div className="new-cul-container">
+                <div className="new-cul-container details-container">
                     <h4 className="new-sub-header">אישור עבודה מנהל</h4>
                     <div className="new-row-container">
                         <h4 className="new-mini-sub-header">סטטוס:</h4>
                         <h4 > בהמתנה</h4>
                     </div>
                 </div>
-                <div className="new-cul-container">
+                <div className="new-cul-container details-container">
                     <h4 className="new-sub-header">אישור עבודה קבלן</h4>
                     <div className="new-row-container">
                         <h4 className="new-mini-sub-header">סטטוס:</h4>
@@ -85,7 +90,9 @@ export const NewWorkModal = ({ isOpen, closeModal }) => {
                     </div>
                 </div>
             </div>
-            <div className="new-row-container">
+
+
+            <div className="new-row-container btn-container">
                 <button className="save-btn" onClick={() => onSaveBtnClicked()}>שמור</button>
                 <button className="cancel-btn" onClick={() => onCancelBtnClicked()}>בטל</button>
             </div>
