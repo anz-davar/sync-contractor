@@ -58,7 +58,16 @@
         flex-direction: row;
         justify-content: flex-start;
         align-items: center;
-        margin: 0 10px 10px 10px;
+        margin: 5px;
+
+        .new-mini-sub-header {
+            margin: 0 0 0 10px;
+        }
+
+        h4 {
+            align-self: center;
+            margin: 0;
+        }
     }
 
     .new-row-section {

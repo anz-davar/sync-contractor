@@ -1,4 +1,4 @@
-.header-container{
+.header-container {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -7,22 +7,28 @@
     padding: 20px;
     border-radius: 0 0 20px 20px;
     align-items: center;
-    
-.app-name{
-    font-size: 40px;
-    color: bisque;
-    font-family: caveat;
-    margin: 0;
-}
 
-    .header-nav-bar{
+    .app-name {
+        font-size: 40px;
+        color: bisque;
+        font-family: caveat;
+        margin: 0;
+    }
+
+    .header-nav-bar {
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-evenly;
         align-content: center;
 
-        .link-item{
-            margin: 0px 20px ;
+        .link-item {
+            margin: 0px 20px;
         }
+    }
+
+    .active-link {
+        color: rgb(189, 177, 6);
+        font-weight: bold;
+        text-decoration: underline;
     }
 }
