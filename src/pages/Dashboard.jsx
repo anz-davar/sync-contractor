@@ -1,20 +1,50 @@
-export const Dashboard = () => {
+import { useState } from "react"
+import { CostsChart } from "../cmps/Dashboard/CostsChart"
+import { FacilityFaultsChart } from "../cmps/Dashboard/FacilityFaultsChart"
+import { TimeStatusChart } from "../cmps/Dashboard/TimeStatusChart"
+import { WorkStatusChart } from "../cmps/Dashboard/WorkStatusChart"
 
-    return <div>
-        <div>
-            <h4> עבודות פעילות</h4>
-            <h4>4324</h4>
-            <h4>432423</h4>
+export const Dashboard = () => {
+    const [chart, setChart] = useState('costs');
+
+    const getChartTitle = () => {
+        switch (chart) {
+            case 'costs':
+                return 'ניהול עלויות';
+            case 'faults':
+                return 'סטטוס תקלות לפי מתקן';
+            case 'time':
+                return 'לוחות זמנים';
+            case 'work':
+                return 'סטטוס עבודות';
+        }
+    }
+    return <>
+
+        <div className="dashboard-main-container">
+            <div className="dashboard-select-container">
+                <label htmlFor="chart-select">בחר גרף</label>
+                <select id="chart-select"
+                    onChange={(e) => setChart(e.target.value)}>
+                    <option value='costs'>ניהול עלויות</option>
+                    <option value='faults'>סטטוס תקלות לפי מתקן</option>
+                    <option value='time'>לוחות זמנים</option>
+                    <option value='work'>סטטוס עבודות</option>
+                </select>
+                {/* TODO: add graph selection */}
+            </div>
+
+            <div className="dashboard-filter-container">
+                {/* TODO: add filter */}
+            </div>
         </div>
-        <div>
-            <h4>עבודות באיחור</h4>
-            <h4>412321</h4>
-            <h4>423123</h4>
+
+        <div className="dashboard-graph-container">
+            <h2>{getChartTitle()}</h2>
+            {chart === 'costs' && <CostsChart />}
+            {chart === 'faults' && <FacilityFaultsChart />}
+            {chart === 'time' && <TimeStatusChart />}
+            {chart === 'work' && <WorkStatusChart />}
         </div>
-        <div>
-            <h4>עלות עבודות</h4>
-            <h4>סה"כ עבודה X: 456$ </h4>
-            <h4>423123</h4>
-        </div>
-    </div>
+    </>
 }

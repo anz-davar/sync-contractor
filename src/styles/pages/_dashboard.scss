@@ -1,0 +1,22 @@
+.dashboard-main-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 10px;
+
+    .dashboard-select-container {
+        align-self: center;
+        justify-self: center;
+
+        label {
+            font-weight: 600;
+        }
+    }
+
+    .dashboard-graph-container {
+        width: 90vw;
+        height: 80vh;
+        min-height: 300px;
+
+    }
+
+}
