@@ -3,7 +3,7 @@ import { FaTrash } from "react-icons/fa";
 
 export const WorkRow = ({ row, removeRow }) => {
     const [workRow, setWorkRow] = useState();
-    const [type, setType] = useState('מטר');
+    const [type, setType] = useState('יחידה');
 
     useEffect(() => {
         setWorkRow(row);
