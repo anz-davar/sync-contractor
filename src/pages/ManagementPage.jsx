@@ -14,11 +14,9 @@ export const ManagementPage = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return <main className="main-container contractor-main-container">
-    <div>
-      <PersonalDetails user={user} />
-      <button className="add-work-btn" onClick={() => setIsOpen(true)} >הוסף משימה לעבודה פעילה +</button>
-      {/* TODO: Add filter, choose from drop down and will show relevant search options */}
-    </div>
+    <PersonalDetails user={user} />
+    <button className="add-work-btn" onClick={() => setIsOpen(true)} >הוסף משימה לעבודה פעילה +</button>
+    {/* TODO: Add filter, choose from drop down and will show relevant search options */}
     <WorkTable isManager={user.isManager}
       data={activeTableData}
       isDone={false} />
