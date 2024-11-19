@@ -3,15 +3,25 @@ import { FaDroplet } from "react-icons/fa6";
 export const Header = () => {
 
     const { pathname } = useLocation()
+    const getClassName = (linkName) => {
+        const path = `/sync-contractor${linkName}`;
+        console.log('path', path);
+        console.log('pathname', pathname);
+
+        if (pathname === path)
+            return 'active-link';
+    }
+
+
 
     return <header className="header-container">
         <h1 className="app-name">Sync {<FaDroplet />} Contractor</h1>
         <nav className="header-nav-bar">
-            <Link className={`link-item ${pathname === "/login" ? "active-link" : ""}`} to="/login">התחברות</Link>
-            <Link className={`link-item ${pathname === "/permissions" ? "active-link" : ""}`} to="/permissions">הרשאות</Link>
-            <Link className={`link-item ${pathname === "/dashboard" ? "active-link" : ""}`} to="/dashboard">דשבורד</Link>
-            <Link className={`link-item ${pathname === "/managementTable" ? "active-link" : ""}`} to="/managementTable">ניהול עבודות</Link>
-            <Link className={`link-item ${pathname === "/" ? "active-link" : ""}`} to="/">בית</Link>
-        </nav>
-    </header>
+            <Link className={`link-item ${getClassName('/login')}`} to="sync-contractor/login">התחברות</Link>
+            <Link className={`link-item ${getClassName('/permissions')}`} to="sync-contractor/permissions">הרשאות</Link>
+            <Link className={`link-item ${getClassName('/dashboard')}`} to="sync-contractor/dashboard">דשבורד</Link>
+            <Link className={`link-item ${getClassName('/managementTable')}`} to="sync-contractor/managementTable">ניהול עבודות</Link>
+            <Link className={`link-item ${getClassName('')}`} to="/sync-contractor" > בית</Link>
+        </nav >
+    </header >
 }

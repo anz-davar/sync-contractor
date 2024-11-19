@@ -14,14 +14,14 @@ function App() {
   return (
     <>
 
-      {location.pathname !== '/login' && <Header />}
+      {location.pathname !== '/sync-contractor/login' && <Header />}
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/managementTable' element={<ManagementPage />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/permissions' element={<Permissions />} />
-        <Route path='/showWork' element={<ShowWork />} />
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/sync-contractor' element={<Home />} />
+        <Route path='/sync-contractor/managementTable' element={<ManagementPage />} />
+        <Route path='/sync-contractor/login' element={<Login />} />
+        <Route path='/sync-contractor/permissions' element={<Permissions />} />
+        <Route path='/sync-contractor/showWork' element={<ShowWork />} />
+        <Route path='/sync-contractor/dashboard' element={<Dashboard />} />
 
         <Route path='*' element={<h1>Page Not Found</h1>} />
       </Routes>
