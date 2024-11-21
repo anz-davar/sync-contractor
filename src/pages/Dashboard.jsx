@@ -3,6 +3,7 @@ import { CostsChart } from "../cmps/Dashboard/CostsChart"
 import { FacilityFaultsChart } from "../cmps/Dashboard/FacilityFaultsChart"
 import { TimeStatusChart } from "../cmps/Dashboard/TimeStatusChart"
 import { WorkStatusChart } from "../cmps/Dashboard/WorkStatusChart"
+import { ToggleButton } from "@mui/material"
 
 export const Dashboard = () => {
     const [chart, setChart] = useState('costs');
@@ -31,11 +32,22 @@ export const Dashboard = () => {
                     <option value='time'>לוחות זמנים</option>
                     <option value='work'>סטטוס עבודות</option>
                 </select>
-                {/* TODO: add graph selection */}
             </div>
 
             <div className="dashboard-filter-container">
-                {/* TODO: add filter */}
+                <div className="col-input">
+                    <label>תאיך התחלה</label>
+                    <input type="Date" />
+                </div>
+                <div className="col-input">
+                    <label>תאריך סיום</label>
+                    <input type="Date" />
+                </div>
+                <div className="col-input">
+                    <label>שם קבלן</label>
+                    <input type="Text" />
+                </div>
+
             </div>
         </div>
 

@@ -1,5 +1,8 @@
 .dashboard-main-container {
     display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    align-items: stretch;
     flex-wrap: wrap;
     margin: 0 10px;
 
@@ -9,6 +12,19 @@
 
         label {
             font-weight: 600;
+        }
+    }
+
+    .dashboard-filter-container {
+        margin: 10px 0px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        .col-input {
+            display: flex;
+            flex-direction: column;
         }
     }
 
