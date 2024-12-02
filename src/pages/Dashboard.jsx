@@ -31,6 +31,7 @@ export const Dashboard = () => {
                     <option value='faults'>סטטוס תקלות לפי מתקן</option>
                     <option value='time'>לוחות זמנים</option>
                     <option value='work'>סטטוס עבודות</option>
+                    <option value='work'>פרויקטים</option>
                 </select>
             </div>
 
