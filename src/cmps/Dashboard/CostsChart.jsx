@@ -51,9 +51,9 @@ export const CostsChart = () => {
                 }}
             >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" stroke="#000" />
-                <YAxis orientation='right' stroke="#000" tickMargin={20}>
-                    <Label value={'עלויות באלפי ש"ח'} angle={-90} position={'outsideRight'} color={'black'} />
+                <XAxis dataKey="name" stroke="#000" tickMargin={10}/>
+                <YAxis orientation='right' stroke="#000" tickMargin={40}>
+                    <Label value={'עלויות באלפי ש"ח'} angle={-270} position={'right'} color={'black'} />
                 </YAxis>
                 <ReferenceLine y={0} stroke="#000" />
                 <Bar dataKey="ils" fill="#05350f" maxBarSize={50} />
