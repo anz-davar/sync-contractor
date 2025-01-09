@@ -18,6 +18,7 @@ export const Header = () => {
         <h1 className="app-name">Sync {<FaDroplet />} Contractor</h1>
         <nav className="header-nav-bar">
             <Link className={`link-item ${getClassName('/login')}`} to="sync-contractor/login">התחברות</Link>
+            <Link className={`link-item ${getClassName('/register')}`} to="sync-contractor/register">הרשמה</Link>
             <Link className={`link-item ${getClassName('/permissions')}`} to="sync-contractor/permissions">הרשאות</Link>
             <Link className={`link-item ${getClassName('/dashboard')}`} to="sync-contractor/dashboard">דשבורד</Link>
             <Link className={`link-item ${getClassName('/managementTable')}`} to="sync-contractor/managementTable">ניהול עבודות</Link>

@@ -1,7 +1,27 @@
 
 import users from "../data/user.json"
 import works from "../data/job.json"
+import axios from 'axios';
 
+class DataService {
+    constructor() {
+        this.baseURL = 'http://localhost:8000';
+    }
+
+    setAuthHeader(token) {
+        axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+    }
+
+    login(data) {
+        return axios.post(`${this.baseURL}/auth/login/`, data);
+    }
+
+    register(data) {
+        return axios.post(`${this.baseURL}/auth/registration/`, data);
+    }
+}
+
+export default new DataService();
 
 export const getTableData = (user, isDone) => {
     if (!user || !users || !works) {
