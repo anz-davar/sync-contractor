@@ -1,44 +1,55 @@
-export const columns = [{
-    selector: row => row.workNumber,
-    name: 'מספר עבודה',
-}, {
-    selector: row => row.classification,
-    name: 'סיווג',
-}, {
-    selector: row => row.startDate,
-    name: 'תאריך התחלה',
-}, {
-    selector: row => row.dueEndDate,
-    name: 'תאריך יעד לסיום',
+export const columns = [
+    { selector: row => row.work_number, name: 'מספר עבודה', sortable: true },
+    { selector: row => row.classification, name: 'סיווג', sortable: true },
+    { selector: row => row.start_date, name: 'תאריך התחלה', sortable: true },
+    { selector: row => row.due_end_date, name: 'תאריך יעד לסיום', sortable: true },
+    { selector: row => row.status, name: 'סטטוס', sortable: true },
+    { selector: row => row.contractor_name, name: 'שם', sortable: true },
+    { selector: row => row.facility_name, name: 'שם מתקן', sortable: true },
+];
 
-}, {
-    selector: row => row.endDate,
-    name: 'תאריך סיום',
-}, {
-    selector: row => row.status,
-    name: 'סטטוס',
-},
-{
-    selector: row => row.name,
-    name: 'שם',
-},
-{
-    selector: row => row.phoneNum,
-    name: 'טלפון',
-},
-{
-    selector: row => row.contractorRank,
-    name: 'ציון קבלן',
-},
-{
-    selector: row => row.facilityNum,
-    name: 'מספר מתקן',
-},
-{
-    selector: row => row.locationName,
-    name: 'מיקום',
-},
-]
+
+// export const columns = [{
+//     selector: row => row.workNumber,
+//     name: 'מספר עבודה',
+// }, {
+//     selector: row => row.classification,
+//     name: 'סיווג',
+// }, {
+//     selector: row => row.startDate,
+//     name: 'תאריך התחלה',
+// }, {
+//     selector: row => row.dueEndDate,
+//     name: 'תאריך יעד לסיום',
+//
+// }, {
+//     selector: row => row.endDate,
+//     name: 'תאריך סיום',
+// }, {
+//     selector: row => row.status,
+//     name: 'סטטוס',
+// },
+// {
+//     selector: row => row.name,
+//     name: 'שם',
+// },
+// {
+//     selector: row => row.phoneNum,
+//     name: 'טלפון',
+// },
+// {
+//     selector: row => row.contractorRank,
+//     name: 'ציון קבלן',
+// },
+// {
+//     selector: row => row.facilityNum,
+//     name: 'מספר מתקן',
+// },
+// {
+//     selector: row => row.locationName,
+//     name: 'מיקום',
+// },
+// ]
 
 
 const headers2 = [{

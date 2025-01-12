@@ -1,16 +1,219 @@
+// import users from "../data/user.json"
+// import works from "../data/job.json"
+// import axios from 'axios';
+//
+// class DataService {
+//     constructor() {
+//         this.baseURL = 'http://localhost:8000';
+//     }
+//
+//     setAuthHeader(token) {
+//         axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+//     }
+//
+//     login(data) {
+//         return axios.post(`${this.baseURL}/auth/login/`, data);
+//     }
+//
+//     register(data) {
+//         return axios.post(`${this.baseURL}/auth/registration/`, data);
+//     }
+//
+//     async getWorks() {
+//         try {
+//             const token = localStorage.getItem('accessToken'); // Get token inside the function
+//             if (!token) {
+//                 throw new Error("No token found in local storage"); // Handle missing token
+//             }
+//             const response = await axios.get(`${this.baseURL}/works/`, {
+//                 headers: {
+//                     Authorization: `Bearer ${token}` // Set header directly in request
+//                 }
+//             });
+//             return response.data;
+//         } catch (error) {
+//             console.error('Error fetching works:', error);
+//             throw error; // Re-throw for component to handle
+//         }
+//     }
+// }
+//
+// export default new DataService();
 
-import users from "../data/user.json"
-import works from "../data/job.json"
 import axios from 'axios';
 
 class DataService {
     constructor() {
-        this.baseURL = 'http://localhost:8000';
+        this.baseURL = 'http://127.0.0.1:8000';
+        this.worksURL = `${this.baseURL}/works/`;
+        this.workItemsURL = `${this.baseURL}/work-items/`;
+        this.facilitiesURL = `${this.baseURL}/facilities/`;
+        this.contractorRatingsURL = `${this.baseURL}/contractor-ratings/`;
     }
 
-    setAuthHeader(token) {
-        axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+    async getWorks() {
+        return this.get(this.worksURL);
     }
+
+    async getWork(id) {
+        return this.get(`${this.worksURL}${id}/`);
+    }
+
+    async createWork(data) {
+        return this.post(this.worksURL, data);
+    }
+
+    // async updateWork(id, data) {
+    //     return this.put(`${this.worksURL}${id}/`, data);
+    // }
+
+    async updateWork(id, data, isPartialUpdate = false) {
+        if (isPartialUpdate) {
+            return this.patch(`${this.worksURL}${id}/`, data);
+        } else {
+            return this.put(`${this.worksURL}${id}/`, data);
+        }
+    }
+
+    async deleteWork(id) {
+        return this.delete(`${this.worksURL}${id}/`);
+    }
+
+    async getWorkItems(workId) {
+        return this.get(`${this.worksURL}${workId}/items/`); // Assuming nested items
+    }
+
+    async createWorkItem(workId, data) {
+        return this.post(`${this.worksURL}${workId}/items/`, data);
+    }
+
+    async updateWorkItem(workId, itemId, data, isPartialUpdate = false) {
+        if (isPartialUpdate) {
+            return this.patch(`${this.worksURL}${workId}/items/${itemId}/`, data);
+        } else {
+            return this.put(`${this.worksURL}${workId}/items/${itemId}/`, data);
+        }
+    }
+
+    // async updateWorkItem(workId, itemId, data) {
+    //     return this.put(`${this.worksURL}${workId}/items/${itemId}/`, data);
+    // }
+
+    async deleteWorkItem(workId, itemId) {
+        return this.delete(`${this.worksURL}${workId}/items/${itemId}/`);
+    }
+
+    async getFacilities() {
+        return this.get(this.facilitiesURL);
+    }
+
+    async createFacility(data) {
+        return this.post(this.facilitiesURL, data);
+    }
+
+    async updateFacility(id, data) {
+        return this.put(`${this.facilitiesURL}${id}/`, data);
+    }
+
+    async deleteFacility(id) {
+        return this.delete(`${this.facilitiesURL}${id}/`);
+    }
+
+    async getContractorRatings() {
+        return this.get(this.contractorRatingsURL);
+    }
+
+    async createContractorRating(data) {
+        return this.post(this.contractorRatingsURL, data);
+    }
+
+    async updateContractorRating(id, data) {
+        return this.put(`${this.contractorRatingsURL}${id}/`, data);
+    }
+
+    async deleteContractorRating(id) {
+        return this.delete(`${this.contractorRatingsURL}${id}/`);
+    }
+
+    async get(url) {
+        try {
+            const token = localStorage.getItem('accessToken');
+            if (!token) {
+                throw new Error("No token found in local storage");
+            }
+            const response = await axios.get(url, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            return response.data;
+        } catch (error) {
+            console.error(`Error in GET request to ${url}:`, error);
+            throw error;
+        }
+    }
+
+    async post(url, data) {
+        try {
+            const token = localStorage.getItem('accessToken');
+            if (!token) {
+                throw new Error("No token found in local storage");
+            }
+            const response = await axios.post(url, data, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            return response.data;
+        } catch (error) {
+            console.error(`Error in POST request to ${url}:`, error);
+            throw error;
+        }
+    }
+
+    async put(url, data) {
+        try {
+            const token = localStorage.getItem('accessToken');
+            if (!token) {
+                throw new Error("No token found in local storage");
+            }
+            const response = await axios.put(url, data, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            return response.data;
+        } catch (error) {
+            console.error(`Error in PUT request to ${url}:`, error);
+            throw error;
+        }
+    }
+
+    async delete(url) {
+        try {
+            const token = localStorage.getItem('accessToken');
+            if (!token) {
+                throw new Error("No token found in local storage");
+            }
+            const response = await axios.delete(url, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            return response.data;
+        } catch (error) {
+            console.error(`Error in DELETE request to ${url}:`, error);
+            throw error;
+        }
+    }
+    async patch(url, data) { // Add patch method
+        try {
+            const token = localStorage.getItem('accessToken');
+            if (!token) {
+                throw new Error("No token found in local storage");
+            }
+            const response = await axios.patch(url, data, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            return response.data;
+        } catch (error) {
+            console.error(`Error in PATCH request to ${url}:`, error);
+            throw error;
+        }
+    }
+
 
     login(data) {
         return axios.post(`${this.baseURL}/auth/login/`, data);
@@ -68,15 +271,13 @@ export const getTableData = (user, isDone) => {
 
 export const getActiveWorkCount = (user) => {
     return works.reduce((count, currWork) => {
-        if (user.worksIds.includes(currWork.id))
-            return count + 1
+        if (user.worksIds.includes(currWork.id)) return count + 1
         return count
     }, 0)
 }
 
 const _getDate = (timeStamp) => {
-    if (timeStamp === 0)
-        return null
+    if (timeStamp === 0) return null
     const date = new Date(timeStamp);
     return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear();
 }
