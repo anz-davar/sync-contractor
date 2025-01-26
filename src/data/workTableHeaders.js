@@ -1,11 +1,17 @@
 export const columns = [
     { selector: row => row.work_number, name: 'מספר עבודה', sortable: true },
+    { selector: row => row.project, name: 'פרויקט', sortable: true },
     { selector: row => row.classification, name: 'סיווג', sortable: true },
     { selector: row => row.start_date, name: 'תאריך התחלה', sortable: true },
     { selector: row => row.due_end_date, name: 'תאריך יעד לסיום', sortable: true },
+    { selector: row => row.end_date, name: 'תאריך סיום', sortable: true },
     { selector: row => row.status, name: 'סטטוס', sortable: true },
-    { selector: row => row.contractor_name, name: 'שם', sortable: true },
+    { selector: row => row.contractor_name, name: 'שם קבלן', sortable: true },
+    { selector: row => row.manager_name, name: 'שם מנהל', sortable: true },
     { selector: row => row.facility_name, name: 'שם מתקן', sortable: true },
+    { selector: row => row.phone_number, name: 'טלפון  קבלן', sortable: true },
+    { selector: row => row.location_name, name: 'מיקום', sortable: true },
+    { selector: row => row.average_score, name: 'ציון קבלן', sortable: true },
 ];
 
 

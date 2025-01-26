@@ -49,6 +49,7 @@ class DataService {
         this.workItemsURL = `${this.baseURL}/work-items/`;
         this.facilitiesURL = `${this.baseURL}/facilities/`;
         this.contractorRatingsURL = `${this.baseURL}/contractor-ratings/`;
+        this.rolesURL = `${this.baseURL}/user-roles/`;
     }
 
     async getWorks() {
@@ -105,6 +106,10 @@ class DataService {
 
     async getFacilities() {
         return this.get(this.facilitiesURL);
+    }
+
+    async getClassifications() {
+        return this.get(`${this.baseURL}/works/classifications/`)
     }
 
     async createFacility(data) {
@@ -221,6 +226,60 @@ class DataService {
 
     register(data) {
         return axios.post(`${this.baseURL}/auth/registration/`, data);
+    }
+
+    async getManagers() {
+        try {
+            const managersAndSuperAdmins = await this.get(`${this.rolesURL}managers_and_superadmins_for_dropdown/`);
+            return managersAndSuperAdmins;
+        } catch (error) {
+            console.error("Error fetching managers and super admins:", error);
+            return []; // Return an empty array in case of error
+        }
+    }
+
+    async getContractors() {
+        try {
+                const contractors = await this.get(`${this.rolesURL}contractors_for_dropdown/`);
+            return contractors;
+        } catch (error) {
+            console.error("Error fetching contractors:", error);
+            return []; // Return an empty array in case of error
+        }
+    }
+
+    async getReports(reportType, startDate, endDate, contractorId, facilityName, classification ) {
+        let url = `${this.worksURL}reports/?type=${reportType}`;
+        if (startDate) {
+            url += `&start_date=${startDate.toISOString().split('T')[0]}`;
+        }
+        if (endDate) {
+            url += `&end_date=${endDate.toISOString().split('T')[0]}`;
+        }
+        if (contractorId) {
+            url += `&contractor_id=${contractorId}`;
+        }
+        if (facilityName) {
+            url += `&facility_name=${facilityName}`;
+        }
+        if (classification) {
+            url += `&classification=${classification}`;
+        }
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                },
+            });
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error("Error fetching reports:", error);
+            throw error; // Re-throw the error to be handled by the component
+        }
     }
 }
 

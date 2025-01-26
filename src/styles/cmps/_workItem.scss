@@ -16,19 +16,29 @@
         direction: rtl;
         *{font-size: 18px;}
     }
-
-    .work-ranking-container{
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        height: 30px;
+    //
+    //.work-ranking-container{
+    //    display: flex;
+    //    flex-direction: row;
+    //    align-items: flex-start;
+    //    height: 30px;
+    //    margin:  10px 0;
+    //    .star-rating{
+    //    margin: 5px 0;
+    //    direction: rtl;
+    //    }
+    //}
+    .work-ranking-container {
+        /* display: flex;        Remove this */
+        /* flex-direction: row;  Remove this */
+        /* align-items: flex-start; Remove this */
+        /* height: 30px;        Remove this */
         margin:  10px 0;
         .star-rating{
-        margin: 5px 0;
-        direction: rtl;
+            margin: 5px 0;
+            direction: rtl;
         }
     }
-
     .work-item-sub-title{
         font-size: 30px;
         font-weight: 400;

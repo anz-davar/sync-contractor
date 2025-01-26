@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 
 export const ManagementPage = () => {
+
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [allWorks, setAllWorks] = useState([]);
@@ -76,7 +77,7 @@ export const ManagementPage = () => {
       } else {
         await DataService.createWork(workData);
       }
-      fetchWorks();
+     await fetchWorks();
     } catch (error) {
       console.error('Error saving work:', error);
       alert("An error occurred while saving the work. Please try again.");

@@ -4,29 +4,57 @@ import DataTable from "react-data-table-component";
 import { WorkItem } from "./WorkItem";
 import {Button, IconButton} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {format} from "date-fns";
 
 export const WorkTable = ({ isManager = false, data, isDone = false ,onEdit, onDelete }) => {
     const [dataColumns, setDataColumns] = useState([]);
+    const [tableData, setTableData] = useState([]);
 
     useEffect(() => {
         const columnsToShow = setColumnsToShowFn(columns, isManager, isDone);
         setDataColumns(columnsToShow);
     }, [isManager, columns, isDone]);
 
+
+    const formatDate = (dateString) => {
+        if (dateString) {
+            try {
+                return format(new Date(dateString), 'dd/MM/yyyy');
+            } catch (error) {
+                console.error("Invalid date:", dateString, error);
+                return "Invalid Date";
+            }
+        }
+        return '';
+    };
+
+    useEffect(() => {
+        if (data) {
+            const formattedData = data.map(item => ({
+                ...item,
+                start_date: formatDate(item.start_date),
+                due_end_date: formatDate(item.due_end_date),
+                end_date: formatDate(item.end_date),
+            }));
+            setTableData(formattedData);
+        }
+
+    }, [data]);
     const setColumnsToShowFn = (columns, isManager, isDone) => {
         return columns.filter((column) => {
-            // if (column.name === 'תאריך סיום' && !isDone) return false;
+            if (column.name === 'תאריך סיום' && !isDone) return false;
             // if (column.name === 'ציון קבלן' && !isManager) return false;
             return true;
         }).map((column) => {
-            switch (column.name) {
-                case 'שם':
-                    return { ...column, name: isManager ? 'שם קבלן' : 'שם מנהל' };
-                case 'טלפון':
-                    return { ...column, name: isManager ? 'טלפון קבלן' : 'טלפון מנהל' };
-                default:
-                    return column;
-            }
+            // switch (column.name) {
+            //     case 'שם':
+            //         return { ...column, name: isManager ? 'שם קבלן' : 'שם מנהל' };
+            //     case 'טלפון':
+            //         return { ...column, name: isManager ? 'טלפון קבלן' : 'טלפון מנהל' };
+            //     default:
+            //         return column;
+            // }
+            return column;
         });
     };
 
@@ -42,14 +70,6 @@ export const WorkTable = ({ isManager = false, data, isDone = false ,onEdit, onD
         }
     }
 
-
-    // const actions = [
-    //     {
-    //         cell: (row) => <Button onClick={() => handleEditClick(row)}>Edit</Button>,
-    //         allowOverflow: false,
-    //         button: true,
-    //     },
-    // ];
     const actions = [
         {
             cell: (row) => (
@@ -60,8 +80,8 @@ export const WorkTable = ({ isManager = false, data, isDone = false ,onEdit, onD
                     </IconButton>
                 </>
             ),
-            allowOverflow: false,
-            button: true,
+            // allowOverflow: false,
+            // button: true,
         },
     ];
 
@@ -72,71 +92,17 @@ export const WorkTable = ({ isManager = false, data, isDone = false ,onEdit, onD
 
 
     if (!data || data.length === 0) return <p>אין מידע להצגה</p>;
-
+    console.log(data);
+    console.log('data');
     return (
         <DataTable className="data-table"
             columns={[...dataColumns, ...actions]}
             // columns={dataColumns}
-            data={data}
+            // data={data}
+            data={tableData}
             expandableRows
             expandableRowsComponent={ExpandedComponent}
             title={`עבודות ${isDone ? "שהסתיימו" : "פעילות"}`}
         />
     );
 };
-
-
-// import {useEffect, useState} from "react";
-// import {columns} from "../../data/workTableHeaders";
-// import DataTable from "react-data-table-component";
-// import {WorkItem} from "./WorkItem";
-//
-// export const WorkTable = ({isManager = false, data, isDone = false}) => {
-//     console.log(data);
-//     const [dataColumns, setDataColumns] = useState();
-//
-//     useEffect(() => {
-//         setDataColumns(setColumnsToShow())
-//     }, [isManager, columns, isDone])
-//     console.log(dataColumns);
-//     const setColumnsToShow = () => {
-//         if (!columns) return;
-//         const columnsToShow = []
-//         columns.map(column => {
-//             switch (column.name) {
-//                 case ('תאריך סיום'):
-//                     if (isDone) columnsToShow.push(column);
-//                 case ('ציון קבלן'):
-//                     if (isManager) columnsToShow.push(column);
-//                     break;
-//                 case('שם'):
-//                     columnsToShow.push({...column, name: isManager ? 'שם קבלן' : 'שם מנהל'})
-//                     break;
-//                 case('טלפון'):
-//                     columnsToShow.push({...column, name: isManager ? 'טלפון קבלן' : 'טלפון מנהל'})
-//                     break;
-//                 default:
-//                     columnsToShow.push(column);
-//                     break;
-//             }
-//         })
-//         return columnsToShow
-//     }
-//
-//     const ExpandedComponent = ({data}) => {
-//         return <WorkItem data={data}/>;
-//     };
-//
-//     if (!columns) return <h1>אין מידע להצגה</h1>
-//
-//     return <>
-//         <DataTable className="data-table"
-//                    columns={dataColumns}
-//                    data={data}
-//                    reverse
-//                    // expandableRows
-//                    // expandableRowsComponent={ExpandedComponent}
-//                    title={`עבודות ${isDone ? "שהסתיימו" : "פעילות"}`}
-//         />
-//     </>
-// }
