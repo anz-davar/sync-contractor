@@ -5,7 +5,8 @@ export const workItemColumns = [
     { selector: row => row.actual_amount, name: 'כמות בפועל', sortable: true },
     { selector: row => row.unit_cost, name: 'עלות ליחידה', sortable: true },
     { selector: row => row.totalSectionCost, name: 'סה"כ עלות לסעיף', sortable: true },
-    { selector: row => row.status, name: 'סטטוס ביצוע', sortable: true },
+    // { selector: row => row.status, name: 'סטטוס ביצוע', sortable: true },
+    { selector: row => row.status_display, name: 'סטטוס ביצוע', sortable: true },
 ];
 // export const workItemColumns = [{
 //     selector: row => row.section,

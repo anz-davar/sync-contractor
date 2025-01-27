@@ -65,8 +65,8 @@ export const ManagementPage = () => {
 
   useEffect(() => {
     if (allWorks) {
-      setActiveTableData(allWorks.filter(work => work.status !== "FINISHED"));
-      setfinishedTableData(allWorks.filter(work => work.status === "FINISHED"));
+      setActiveTableData(allWorks.filter(work => work.status !== "PAID"));
+      setfinishedTableData(allWorks.filter(work => work.status === "PAID"));
     }
   }, [allWorks]);
 

@@ -281,6 +281,16 @@ class DataService {
             throw error; // Re-throw the error to be handled by the component
         }
     }
+
+    async getWorkStatuses() {
+        return this.get(`${this.worksURL}work_statuses/`);
+    }
+
+    async getWorkItemStatuses() {
+        return this.get(`${this.workItemsURL}work_item_statuses/`);
+    }
+
+
 }
 
 export default new DataService();

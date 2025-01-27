@@ -22,6 +22,9 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
     const [managers, setManagers] = useState([]);
     const [facilities, setFacilities] = useState([]);
 
+    const [workStatuses, setWorkStatuses] = useState([]);
+    const [workItemStatuses, setWorkItemStatuses] = useState([]);
+
     const defaultWork = {
         id: null,
         work_number: '',
@@ -120,14 +123,18 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
     useEffect(() => {
         const fetchReferenceData = async () => {
             try {
-                const [contractorsData, managersData, facilitiesData] = await Promise.all([
+                const [contractorsData, managersData, facilitiesData, workStatusResponse, workItemStatusResponse] = await Promise.all([
                     DataService.getContractors(),
                     DataService.getManagers(),
-                    DataService.getFacilities()
+                    DataService.getFacilities(),
+                    DataService.getWorkStatuses(),
+                    DataService.getWorkItemStatuses(),
                 ]);
                 setContractors(contractorsData);
                 setManagers(managersData);
                 setFacilities(facilitiesData);
+                setWorkStatuses(workStatusResponse);
+                setWorkItemStatuses(workItemStatusResponse);
             } catch (error) {
                 console.error('Error fetching reference data:', error);
                 alert('Error loading form data. Please try again.');
@@ -195,7 +202,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         <Grid item xs={4}>
                             <TextField
                                 {...register("work_number", {required: "Work Number is required"})}
-                                label="Work Number"
+                                label="מספר עבודה"
                                 fullWidth
                                 margin="normal"
                                 error={!!errors.work_number}
@@ -318,14 +325,19 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                     {...register("status", {required: "Status is required"})}
                                     label="Status"
                                 >
-                                    <MenuItem value="PENDING_APPROVAL">Pending Approval</MenuItem>
-                                    <MenuItem value="APPROVED">Approved</MenuItem>
-                                    <MenuItem value="IN_PROGRESS">In Progress</MenuItem>
-                                    <MenuItem value="COMPLETED_BY_CONTRACTOR">Completed by Contractor</MenuItem>
-                                    <MenuItem value="WAITING_MANAGER_APPROVAL">Waiting Manager Approval</MenuItem>
-                                    <MenuItem value="FINISHED">Finished</MenuItem>
-                                    <MenuItem value="WAITING_PAYMENT">Waiting Payment</MenuItem>
-                                    <MenuItem value="PAID">Paid</MenuItem>
+                                    {workStatuses.map((status) => (
+                                        <MenuItem key={status.code} value={status.code}>
+                                            {status.label}
+                                        </MenuItem>
+                                    ))}
+                                    {/*<MenuItem value="PENDING_APPROVAL">Pending Approval</MenuItem>*/}
+                                    {/*<MenuItem value="APPROVED">Approved</MenuItem>*/}
+                                    {/*<MenuItem value="IN_PROGRESS">In Progress</MenuItem>*/}
+                                    {/*<MenuItem value="COMPLETED_BY_CONTRACTOR">Completed by Contractor</MenuItem>*/}
+                                    {/*<MenuItem value="WAITING_MANAGER_APPROVAL">Waiting Manager Approval</MenuItem>*/}
+                                    {/*<MenuItem value="FINISHED">Finished</MenuItem>*/}
+                                    {/*<MenuItem value="WAITING_PAYMENT">Waiting Payment</MenuItem>*/}
+                                    {/*<MenuItem value="PAID">Paid</MenuItem>*/}
                                 </Select>
                             </FormControl>
                         </Grid>
@@ -449,10 +461,15 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                             label="Status"
                                             defaultValue={item.status || "PENDING"}
                                         >
-                                            <MenuItem value="PENDING">Pending</MenuItem>
-                                            <MenuItem value="IN_PROGRESS">In Progress</MenuItem>
-                                            <MenuItem value="QUALITY_CONTROL">Quality Control</MenuItem>
-                                            <MenuItem value="COMPLETED">Completed</MenuItem>
+                                            {/*<MenuItem value="PENDING">Pending</MenuItem>*/}
+                                            {/*<MenuItem value="IN_PROGRESS">In Progress</MenuItem>*/}
+                                            {/*<MenuItem value="QUALITY_CONTROL">Quality Control</MenuItem>*/}
+                                            {/*<MenuItem value="COMPLETED">Completed</MenuItem>*/}
+                                            {workItemStatuses.map((status) => (
+                                                <MenuItem key={status.code} value={status.code}>
+                                                    {status.label}
+                                                </MenuItem>
+                                            ))}
                                         </Select>
                                     </FormControl>
                                 </Grid>
