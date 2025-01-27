@@ -1,7 +1,7 @@
 export const columns = [
     { selector: row => row.work_number, name: 'מספר עבודה', sortable: true },
     { selector: row => row.project, name: 'פרויקט', sortable: true },
-    { selector: row => row.classification, name: 'סיווג', sortable: true },
+    { selector: row => row.classification_display, name: 'סיווג', sortable: true },
     { selector: row => row.start_date, name: 'תאריך התחלה', sortable: true },
     { selector: row => row.due_end_date, name: 'תאריך יעד לסיום', sortable: true },
     { selector: row => row.end_date, name: 'תאריך סיום', sortable: true },

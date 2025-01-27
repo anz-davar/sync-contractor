@@ -7,6 +7,7 @@ export const workItemColumns = [
     { selector: row => row.totalSectionCost, name: 'סה"כ עלות לסעיף', sortable: true },
     // { selector: row => row.status, name: 'סטטוס ביצוע', sortable: true },
     { selector: row => row.status_display, name: 'סטטוס ביצוע', sortable: true },
+    { selector: row => row.work_type, name: 'סוג עבודה', sortable: true },
 ];
 // export const workItemColumns = [{
 //     selector: row => row.section,

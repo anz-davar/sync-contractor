@@ -234,7 +234,6 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         </Grid>
                         <Grid item xs={4}>
                             <FormControl fullWidth margin="normal">
-                                {/*<InputLabel>Classification</InputLabel>*/}
                                 <InputLabel>סיווג</InputLabel>
                                 <Select
                                     value={watchedClassification || ''}
@@ -242,9 +241,13 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                     label="Classification"
                                     disabled={isRestrictedRole}
                                 >
-                                    <MenuItem value="FAULT">Fault</MenuItem>
-                                    <MenuItem value="UPGRADE">Upgrade</MenuItem>
-                                    <MenuItem value="WORK">Work</MenuItem>
+                                    {/*<MenuItem value="FAULT">Fault</MenuItem>*/}
+                                    {/*<MenuItem value="UPGRADE">Upgrade</MenuItem>*/}
+                                    {/*<MenuItem value="WORK">Work</MenuItem>*/}
+                                    <MenuItem value="FAULT">תקלה</MenuItem>
+                                    <MenuItem value="UPGRADE">שדרוג</MenuItem>
+                                    <MenuItem value="WORK">תחזוקה</MenuItem>
+                                    <MenuItem value="GENERAL">כללי</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
