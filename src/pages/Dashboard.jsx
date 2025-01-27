@@ -5,6 +5,7 @@ import {TimeStatusChart} from '../cmps/Dashboard/TimeStatusChart';
 import {WorkStatusChart} from '../cmps/Dashboard/WorkStatusChart';
 import {ContractorsChart} from '../cmps/Dashboard/ContractorsChart'
 import DataService from '../services/DataService';
+import {ContractorsChartWorst} from "../cmps/Dashboard/ContractorsChartWorst.jsx";
 
 export const Dashboard = () => {
     const [chart, setChart] = useState('costs');
@@ -68,6 +69,7 @@ export const Dashboard = () => {
                     case 'time': reportType = 'time'; break;
                     case 'work': reportType = 'works'; break;
                     case 'contractors': reportType = 'contractors'; break;
+                    case 'contractorsWorst': reportType = 'contractorsWorst'; break;
                     default: throw new Error('Invalid chart type');
                 }
                 const data = await DataService.getReports(reportType, startDate, endDate, contractorId, facilityName, classification);
@@ -88,7 +90,8 @@ export const Dashboard = () => {
             case 'faults': return 'סטטוס תקלות לפי מתקן';
             case 'time': return 'לוחות זמנים';
             case 'work': return 'סטטוס עבודות';
-            case 'contractors': return 'קבלנים';
+            case 'contractors': return 'קבלנים הטובים';
+            case 'contractorsWorst': return 'קבלנים הגרועים';
             default: return '';
         }
     };
@@ -123,6 +126,7 @@ export const Dashboard = () => {
             case 'time': return <div style={chartStyle}><TimeStatusChart data={chartData} /></div>;
             case 'work': return <div style={chartStyle}><WorkStatusChart data={chartData} /></div>;
             case 'contractors': return <div style={chartStyle}><ContractorsChart data={chartData} /></div>;
+            case 'contractorsWorst': return <div style={chartStyle}><ContractorsChartWorst data={chartData} /></div>;
             default: return null;
         }
     };
@@ -136,7 +140,8 @@ export const Dashboard = () => {
                     <option value="faults">סטטוס תקלות לפי מתקן</option>
                     <option value="time">לוחות זמנים</option>
                     <option value="work">סטטוס עבודות</option>
-                    <option value="contractors">קבלנים</option>
+                    <option value="contractors">קבלנים הטובים</option>
+                    <option value="contractorsWorst">קבלנים הגרועים</option>
                 </select>
             </div>
 
@@ -174,10 +179,16 @@ export const Dashboard = () => {
                 <div className="col-input">
                     <label>סיווג</label>
                     <select id="classification-select" onChange={(e) => setClassification(e.target.value)} value={classification || ''}>
+                        {/*<option value="">כל הסיווגים</option>*/}
+                        {/*{classifications.map((classification) => (*/}
+                        {/*    <option key={classification} value={classification}>*/}
+                        {/*        {classification}*/}
+                        {/*    </option>*/}
+                        {/*))}*/}
                         <option value="">כל הסיווגים</option>
-                        {classifications.map((classification) => (
-                            <option key={classification} value={classification}>
-                                {classification}
+                        {Object.entries(classifications).map(([key, value]) => (
+                            <option key={key} value={key}>
+                                {value}
                             </option>
                         ))}
                     </select>
