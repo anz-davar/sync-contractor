@@ -21,6 +21,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
     const [contractors, setContractors] = useState([]);
     const [managers, setManagers] = useState([]);
     const [facilities, setFacilities] = useState([]);
+    const [user, setUser] = useState(null);
 
     const [workStatuses, setWorkStatuses] = useState([]);
     const [workItemStatuses, setWorkItemStatuses] = useState([]);
@@ -32,7 +33,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
         classification: 'FAULT',
         start_date: new Date().toISOString().split('T')[0],
         due_end_date: new Date().toISOString().split('T')[0],
-        end_date:null,
+        end_date: null,
         status: 'PENDING_APPROVAL',
         contractor: 2,
         manager: 1,
@@ -123,6 +124,8 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
     useEffect(() => {
         const fetchReferenceData = async () => {
             try {
+                const parsedUser = JSON.parse(localStorage.getItem('user'));
+                setUser(parsedUser);
                 const [contractorsData, managersData, facilitiesData, workStatusResponse, workItemStatusResponse] = await Promise.all([
                     DataService.getContractors(),
                     DataService.getManagers(),
@@ -193,9 +196,14 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
             alert("An error occurred while saving the work. Please try again.");
         }
     };
+
+    const isContractorOrViewer = user && ['CONTRACTOR', 'CONTRACTOR_VIEWER'].includes(user.role);
+
+
     return (
         <Dialog open={isOpen} onClose={closeModal} fullWidth maxWidth="md">
-            <DialogTitle>{initialWork ? 'Edit Work' : 'Add New Work'}</DialogTitle>
+            {/*<DialogTitle>{initialWork ? 'Edit Work' : 'Add New Work'}</DialogTitle>*/}
+            <DialogTitle>{initialWork ? 'לערוך עבודה' : 'הוספת עבודה'}</DialogTitle>
             <DialogContent>
                 <form onSubmit={handleSubmit(onSubmitHandler)}>
                     <Grid container spacing={2}>
@@ -203,6 +211,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                             <TextField
                                 {...register("work_number", {required: "Work Number is required"})}
                                 label="מספר עבודה"
+                                // label="work_number"
                                 fullWidth
                                 margin="normal"
                                 error={!!errors.work_number}
@@ -212,7 +221,8 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         <Grid item xs={4}>
                             <TextField
                                 {...register("project", {required: "project is required"})}
-                                label="project"
+                                // label="project"
+                                label="פרויקט"
                                 fullWidth
                                 margin="normal"
                                 error={!!errors.project}
@@ -221,7 +231,8 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         </Grid>
                         <Grid item xs={4}>
                             <FormControl fullWidth margin="normal">
-                                <InputLabel>Classification</InputLabel>
+                                {/*<InputLabel>Classification</InputLabel>*/}
+                                <InputLabel>סיווג</InputLabel>
                                 <Select
                                     value={watchedClassification || ''}
                                     {...register("classification", {required: "Classification is required"})}
@@ -235,7 +246,8 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         </Grid>
                         <Grid item xs={4}>
                             <FormControl fullWidth margin="normal" error={!!errors.contractor}>
-                                <InputLabel>Contractor</InputLabel>
+                                <InputLabel>קבלן</InputLabel>
+                                {/*<InputLabel>Contractor</InputLabel>*/}
                                 <Select
                                     value={watchedContractor || ''}
                                     {...register("contractor", {required: "Contractor is required"})}
@@ -251,7 +263,8 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         </Grid>
                         <Grid item xs={4}>
                             <FormControl fullWidth margin="normal" error={!!errors.manager}>
-                                <InputLabel>Manager</InputLabel>
+                                {/*<InputLabel>Manager</InputLabel>*/}
+                                <InputLabel>מנהל</InputLabel>
                                 <Select
                                     value={watchedManager || ''}
                                     {...register("manager", {required: "Manager is required"})}
@@ -267,7 +280,8 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         </Grid>
                         <Grid item xs={4}>
                             <FormControl fullWidth margin="normal" error={!!errors.facility}>
-                                <InputLabel>Facility</InputLabel>
+                                {/*<InputLabel>Facility</InputLabel>*/}
+                                <InputLabel>מתקן</InputLabel>
                                 <Select
                                     value={watchedFacility || ''}
                                     {...register("facility", {required: "Facility is required"})}
@@ -284,7 +298,8 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         <Grid item xs={4}>
                             <TextField
                                 {...register("start_date", {required: "Start Date is required"})}
-                                label="Start Date"
+                                label="תאריך התחלה"
+                                // label="Start Date"
                                 type="date"
                                 fullWidth
                                 margin="normal"
@@ -296,7 +311,8 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         <Grid item xs={4}>
                             <TextField
                                 {...register("due_end_date", {required: "Due End Date is required"})}
-                                label="Due End Date"
+                                // label="Due End Date"
+                                label="תאריך יעד לסיום"
                                 type="date"
                                 fullWidth
                                 margin="normal"
@@ -308,7 +324,8 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         <Grid item xs={4}>
                             <TextField
                                 {...register("end_date")}
-                                label="End Date"
+                                // label="End Date"
+                                label="תאריך סיום בפועל"
                                 type="date"
                                 fullWidth
                                 margin="normal"
@@ -319,7 +336,8 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth margin="normal">
-                                <InputLabel>Status</InputLabel>
+                                {/*<InputLabel>Status</InputLabel>*/}
+                                <InputLabel>סטטוס</InputLabel>
                                 <Select
                                     value={watchedStatus || ''}
                                     {...register("status", {required: "Status is required"})}
@@ -345,7 +363,8 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         <Grid item xs={12}>
                             <TextField
                                 {...register("location_name", {required: "Location is required"})}
-                                label="Location"
+                                label="מיקום"
+                                // label="Location"
                                 fullWidth
                                 margin="normal"
                                 error={!!errors.location_name}
@@ -355,57 +374,110 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         <Grid item xs={12}>
                             <TextField
                                 {...register("remarks")}
-                                label="Remarks"
+                                // label="Remarks"
+                                label="הערות חשובות"
                                 fullWidth
                                 margin="normal"
                                 multiline
                                 rows={3}
                             />
                         </Grid>
-                        <Grid item xs={4}> {/* Adjust xs as needed */}
-                            <TextField
-                                {...register("quality_score")}
-                                label="Quality Score"
-                                type="number"
-                                fullWidth
-                                inputProps={{ min: 1, max: 10 }} // Set min/max values
-                                error={!!errors.quality_score}
-                                helperText={errors.quality_score?.message}
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                {...register("time_score")}
-                                label="Time Score"
-                                type="number"
-                                fullWidth
-                                inputProps={{ min: 1, max: 10 }}
-                                error={!!errors.time_score}
-                                helperText={errors.time_score?.message}
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <TextField
-                                {...register("cost_score")}
-                                label="Cost Score"
-                                type="number"
-                                fullWidth
-                                inputProps={{ min: 1, max: 10 }}
-                                error={!!errors.cost_score}
-                                helperText={errors.cost_score?.message}
-                            />
-                        </Grid>
+
+                        {/*<Grid item xs={4}> /!* Adjust xs as needed *!/*/}
+                        {/*    <TextField*/}
+                        {/*        {...register("quality_score")}*/}
+                        {/*        // label="Quality Score"*/}
+                        {/*        label="ציון איכות"*/}
+                        {/*        type="number"*/}
+                        {/*        fullWidth*/}
+                        {/*        inputProps={{ min: 1, max: 10 }} // Set min/max values*/}
+                        {/*        error={!!errors.quality_score}*/}
+                        {/*        helperText={errors.quality_score?.message}*/}
+                        {/*    />*/}
+                        {/*</Grid>*/}
+                        {/*<Grid item xs={4}>*/}
+                        {/*    <TextField*/}
+                        {/*        {...register("time_score")}*/}
+                        {/*        // label="Time Score"*/}
+                        {/*        label="ציון זמן"*/}
+                        {/*        type="number"*/}
+                        {/*        fullWidth*/}
+                        {/*        inputProps={{ min: 1, max: 10 }}*/}
+                        {/*        error={!!errors.time_score}*/}
+                        {/*        helperText={errors.time_score?.message}*/}
+                        {/*    />*/}
+                        {/*</Grid>*/}
+                        {/*<Grid item xs={4}>*/}
+                        {/*    <TextField*/}
+                        {/*        {...register("cost_score")}*/}
+                        {/*        // label="Cost Score"*/}
+                        {/*        label="ציון עלות"*/}
+                        {/*        type="number"*/}
+                        {/*        fullWidth*/}
+                        {/*        inputProps={{ min: 1, max: 10 }}*/}
+                        {/*        error={!!errors.cost_score}*/}
+                        {/*        helperText={errors.cost_score?.message}*/}
+                        {/*    />*/}
+                        {/*</Grid>*/}
+                        {!isContractorOrViewer && (
+                            <>
+                                <Grid item xs={4}>
+                                    <TextField
+                                        {...register("quality_score", {
+                                            valueAsNumber: true,
+                                            min: {value: 1, message: "Value must be at least 1"},
+                                            max: {value: 10, message: "Value must be at most 10"},
+                                        })}
+                                        label="ציון איכות"
+                                        type="number"
+                                        fullWidth
+                                        error={!!errors.quality_score}
+                                        helperText={errors.quality_score?.message}
+                                    />
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <TextField
+                                        {...register("time_score", {
+                                            valueAsNumber: true,
+                                            min: {value: 1, message: "Value must be at least 1"},
+                                            max: {value: 10, message: "Value must be at most 10"},
+                                        })}
+                                        label="ציון זמן"
+                                        type="number"
+                                        fullWidth
+                                        error={!!errors.time_score}
+                                        helperText={errors.time_score?.message}
+                                    />
+                                </Grid>
+                                <Grid item xs={4}>
+                                    <TextField
+                                        {...register("cost_score", {
+                                            valueAsNumber: true,
+                                            min: {value: 1, message: "Value must be at least 1"},
+                                            max: {value: 10, message: "Value must be at most 10"},
+                                        })}
+                                        label="ציון עלות"
+                                        type="number"
+                                        fullWidth
+                                        error={!!errors.cost_score}
+                                        helperText={errors.cost_score?.message}
+                                    />
+                                </Grid>
+                            </>
+                        )}
                     </Grid>
-                    <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-                        Work Items
+                    <Typography variant="h6" gutterBottom sx={{mt: 2}}>
+                        משימות
+                        {/*Work Items*/}
                     </Typography>
                     {fields.map((item, index) => (
-                        <Paper key={item.id} elevation={2} sx={{ padding: 2, mb: 2 }}>
+                        <Paper key={item.id} elevation={2} sx={{padding: 2, mb: 2}}>
                             <Grid container spacing={2}>
                                 <Grid item xs={12}>
                                     <TextField
-                                        {...register(`items.${index}.description`, { required: "Description is required" })}
-                                        label="Description"
+                                        {...register(`items.${index}.description`, {required: "Description is required"})}
+                                        // label="Description"
+                                        label="תאור"
                                         fullWidth
                                         multiline
                                         rows={3}
@@ -415,8 +487,9 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <TextField
-                                        {...register(`items.${index}.section`, { required: "Section is required" })}
-                                        label="Section"
+                                        {...register(`items.${index}.section`, {required: "Section is required"})}
+                                        label="סעיף"
+                                        // label="Section"
                                         fullWidth
                                         type="number" // Set type to "number" for numeric input
                                         error={!!errors.items?.[index]?.section}
@@ -425,8 +498,9 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <TextField
-                                        {...register(`items.${index}.contract_amount`, { required: "Contract Amount is required" })}
-                                        label="Contract Amount"
+                                        {...register(`items.${index}.contract_amount`, {required: "Contract Amount is required"})}
+                                        // label="Contract Amount"
+                                        label="כמות בחוזה"
                                         fullWidth
                                         type="number" // Set type to "number" for numeric input
                                         error={!!errors.items?.[index]?.contract_amount}
@@ -436,7 +510,8 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 <Grid item xs={6}>
                                     <TextField
                                         {...register(`items.${index}.actual_amount`)}
-                                        label="Actual Amount"
+                                        // label="Actual Amount"
+                                        label="כמות בפועל"
                                         fullWidth
                                         type="number" // Set type to "number" for numeric input
                                         error={!!errors.items?.[index]?.actual_amount}
@@ -445,8 +520,9 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <TextField
-                                        {...register(`items.${index}.unit_cost`, { required: "Unit Cost is required" })}
-                                        label="Unit Cost"
+                                        {...register(`items.${index}.unit_cost`, {required: "Unit Cost is required"})}
+                                        // label="Unit Cost"
+                                        label="עלות ליחידה"
                                         fullWidth
                                         type="number" // Set type to "number" for numeric input
                                         error={!!errors.items?.[index]?.unit_cost}
@@ -455,10 +531,12 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <FormControl fullWidth>
-                                        <InputLabel>Status</InputLabel>
+                                        {/*<InputLabel>Status</InputLabel>*/}
+                                        <InputLabel>סטטוס ביצוע</InputLabel>
                                         <Select
-                                            {...register(`items.${index}.status`, { required: "Status is required" })}
-                                            label="Status"
+                                            {...register(`items.${index}.status`, {required: "Status is required"})}
+                                            // label="Status"
+                                            label="סטטוס ביצוע"
                                             defaultValue={item.status || "PENDING"}
                                         >
                                             {/*<MenuItem value="PENDING">Pending</MenuItem>*/}
@@ -475,8 +553,9 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 </Grid>
                                 <Grid item xs={6}>
                                     <TextField
-                                        {...register(`items.${index}.work_type`, { required: "Work Type is required" })}
-                                        label="Work Type"
+                                        {...register(`items.${index}.work_type`, {required: "Work Type is required"})}
+                                        label="סוג עבודה"
+                                        // label="Work Type"
                                         fullWidth
                                         error={!!errors.items?.[index]?.work_type}
                                         helperText={errors.items?.[index]?.work_type?.message}
@@ -497,12 +576,15 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                             work_type: ''
                         })}
                     >
-                        Add Work Item
+                        {/*Add Work Item*/}
+                        הוספת משימה חדשה
                     </Button>
 
                     <DialogActions>
-                        <Button onClick={closeModal}>Cancel</Button>
-                        <Button type="submit">Save</Button>
+                        {/*<Button onClick={closeModal}>Cancelז</Button>*/}
+                        <Button onClick={closeModal}>בטל</Button>
+                        {/*<Button type="submit">Save</Button>*/}
+                        <Button type="submit">שמור</Button>
                     </DialogActions>
                 </form>
             </DialogContent>
