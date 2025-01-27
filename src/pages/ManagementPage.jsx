@@ -4,6 +4,8 @@ import { WorkTable } from "../cmps/Management/WorkTable";
 import DataService from "../services/DataService";
 import { NewWorkModal } from "../cmps/NewWork/NewWorkModal";
 import { useNavigate } from 'react-router-dom';
+import WorkNotifications from './WorkNotifications';
+
 import {
   Button,
   Dialog,
@@ -125,6 +127,7 @@ export const ManagementPage = () => {
 
   return (
       <main className="main-container contractor-main-container">
+        <WorkNotifications works={activeTableData} userRole={user.role} />
         <PersonalDetails user={user} />
         {/*<button className="add-work-btn" onClick={() => setIsModalOpen(true)}>הוסף עבודה חדשה +</button>*/}
         {!isHidden && (
