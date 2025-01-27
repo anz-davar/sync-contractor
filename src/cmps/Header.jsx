@@ -7,6 +7,7 @@ export const Header = () => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
     const { user, isLoggedIn, logout } = useContext(AuthContext);
+    const isAuthorized = user && ['GENERAL_MANAGER', 'SUPER_ADMIN'].includes(user.role);
 
     const getClassName = (linkName) => {
         const path = `/sync-contractor${linkName}`;
@@ -47,9 +48,14 @@ export const Header = () => {
                             </div>
                         )}
 
-                        <Link className={`link-item ${getClassName('/dashboard')}`} to="sync-contractor/dashboard">
-                            דשבורד
-                        </Link>
+                        {/*<Link className={`link-item ${getClassName('/dashboard')}`} to="sync-contractor/dashboard">*/}
+                        {/*    דשבורד*/}
+                        {/*</Link>*/}
+                        {isAuthorized && (
+                            <Link className={`link-item ${getClassName('/dashboard')}`} to="sync-contractor/dashboard">
+                                דשבורד
+                            </Link>
+                        )}
                         <Link className={`link-item ${getClassName('/managementTable')}`} to="sync-contractor/managementTable">
                             ניהול עבודות
                         </Link>
