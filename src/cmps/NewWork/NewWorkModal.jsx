@@ -7,24 +7,34 @@ import {
     DialogContent,
     DialogTitle,
     FormControl,
-    Grid,
+    Grid, IconButton,
     InputLabel,
     MenuItem,
     Paper,
     Select,
+    Box,
     TextField,
     Typography
 } from '@mui/material';
 import DataService from "../../services/dataService.js";
+import { MessageCircle } from 'lucide-react';
+import WorkComments from "../Management/WorkComments.jsx";
+import ChatIcon from '@mui/icons-material/Chat';  // Add this import
 
 const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
     const [contractors, setContractors] = useState([]);
     const [managers, setManagers] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [user, setUser] = useState(null);
+    const [isCommentsOpen, setIsCommentsOpen] = useState(false);
 
     const [workStatuses, setWorkStatuses] = useState([]);
     const [workItemStatuses, setWorkItemStatuses] = useState([]);
+
+    const handleCommentsToggle = () => {
+        setIsCommentsOpen(!isCommentsOpen);
+    };
+
 
     const defaultWork = {
         id: null,
@@ -200,11 +210,41 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
     const isContractorOrViewer = user && ['CONTRACTOR', 'CONTRACTOR_VIEWER'].includes(user.role);
     const isRestrictedRole = user && ['CONTRACTOR', 'PAYMENT_ADMIN'].includes(user.role);
 
+    const handleCloseModal = () => {
+        closeModal();
+        reset(defaultWork); // Clear the form when the modal closes
+    };
 
     return (
         <Dialog open={isOpen} onClose={closeModal} fullWidth maxWidth="md">
+        {/*<Dialog open={isOpen} onClose={handleCloseModal} fullWidth maxWidth="md">*/}
             {/*<DialogTitle>{initialWork ? 'Edit Work' : 'Add New Work'}</DialogTitle>*/}
-            <DialogTitle>{initialWork ? 'לערוך עבודה' : 'הוספת עבודה'}</DialogTitle>
+            {/*<DialogTitle>{initialWork ? 'לערוך עבודה' : 'הוספת עבודה'}</DialogTitle>*/}
+            <DialogTitle>
+                <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Typography>{initialWork ? 'לערוך עבודה' : 'הוספת עבודה'}</Typography>
+                    {initialWork && (
+                        // <IconButton
+                        //     onClick={handleCommentsToggle}
+                        //     size="small"
+                        // >
+                        //     צט
+                        //     {/*<MessageCircle size={20} />*/}
+                        //     <ChatIcon />
+                        // </IconButton>
+                        <IconButton
+                            onClick={handleCommentsToggle}
+                            size="small"
+                            sx={{ display: 'flex', alignItems: 'center', gap: '4px' }} // Add gap here
+                        >
+                            <ChatIcon  sx={{ color: 'red' }}  />
+                            <Box component="span">
+                                צ'אט
+                            </Box>
+                        </IconButton>
+                    )}
+                </Box>
+            </DialogTitle>
             <DialogContent>
                 <form onSubmit={handleSubmit(onSubmitHandler)}>
                     <Grid container spacing={2}>
@@ -604,14 +644,43 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         הוספת משימה חדשה
                     </Button>
 
-                    <DialogActions>
+                    {/*<DialogActions>*/}
+                    {/*<DialogActions>*/}
+                    <DialogActions sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end', p: 2 }}>
                         {/*<Button onClick={closeModal}>Cancelז</Button>*/}
-                        <Button onClick={closeModal}>בטל</Button>
+                        {/*<Button variant="contained" onClick={closeModal}>בטל</Button>*/}
+
                         {/*<Button type="submit">Save</Button>*/}
-                        <Button type="submit">שמור</Button>
+                        {/*<Button variant="contained" type="submit">שמור</Button>*/}
+
+                        <Button
+                            variant="contained"
+                            onClick={closeModal}
+                            // onClick={handleCloseModal}
+                            color="error"
+                        >
+                            בטל
+                        </Button>
+
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            color="success"
+                        >
+                            שמור
+                        </Button>
                     </DialogActions>
                 </form>
             </DialogContent>
+            {initialWork && (
+                <WorkComments
+                    workId={initialWork.id}
+                    open={isCommentsOpen}
+                    onClose={handleCommentsToggle}
+                    work_number={initialWork.work_number}
+                    project={initialWork.project}
+                />
+            )}
         </Dialog>
     );
 };

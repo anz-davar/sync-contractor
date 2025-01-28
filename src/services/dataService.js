@@ -290,6 +290,13 @@ class DataService {
         return this.get(`${this.workItemsURL}work_item_statuses/`);
     }
 
+    getWorkComments(workId) {
+        return this.get(`${this.worksURL}${workId}/comments/`);
+    }
+
+    createWorkComment(workId, commentData) {
+        return this.post(`${this.worksURL}${workId}/comments/`, commentData);
+    }
 
 }
 
