@@ -90,8 +90,8 @@ export const Dashboard = () => {
             case 'faults': return 'סטטוס תקלות לפי מתקן';
             case 'time': return 'לוחות זמנים';
             case 'work': return 'סטטוס עבודות';
-            case 'contractors': return 'קבלנים הטובים';
-            case 'contractorsWorst': return 'קבלנים הגרועים';
+            case 'contractors': return 'קבלנים מצטיינים';
+            case 'contractorsWorst': return 'קבלנים בתחתית הדירוג';
             default: return '';
         }
     };
@@ -140,8 +140,8 @@ export const Dashboard = () => {
                     <option value="faults">סטטוס תקלות לפי מתקן</option>
                     <option value="time">לוחות זמנים</option>
                     <option value="work">סטטוס עבודות</option>
-                    <option value="contractors">קבלנים הטובים</option>
-                    <option value="contractorsWorst">קבלנים הגרועים</option>
+                    <option value="contractors">קבלנים מצטיינים</option>
+                    <option value="contractorsWorst">קבלנים בתחתית הדירוג</option>
                 </select>
             </div>
 
