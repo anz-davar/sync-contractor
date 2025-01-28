@@ -7,7 +7,7 @@ export const Header = () => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
     const { user, isLoggedIn, logout } = useContext(AuthContext);
-    const isAuthorized = user && ['GENERAL_MANAGER', 'SUPER_ADMIN'].includes(user.role);
+    const isAuthorized = user && ['GENERAL_ENGINEER', 'SUPER_ADMIN'].includes(user.role);
 
     const getClassName = (linkName) => {
         const path = `/sync-contractor${linkName}`;
