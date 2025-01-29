@@ -1,25 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import {useFieldArray, useForm} from 'react-hook-form';
 import {
+    Box,
     Button,
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
     FormControl,
-    Grid, IconButton,
+    Grid,
+    IconButton,
     InputLabel,
     MenuItem,
     Paper,
     Select,
-    Box,
     TextField,
     Typography
 } from '@mui/material';
 import DataService from "../../services/dataService.js";
-import { MessageCircle } from 'lucide-react';
 import WorkComments from "../Management/WorkComments.jsx";
-import ChatIcon from '@mui/icons-material/Chat';  // Add this import
+import ChatIcon from '@mui/icons-material/Chat'; // Add this import
 
 const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
     const [contractors, setContractors] = useState([]);
@@ -217,7 +217,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
 
     return (
         <Dialog open={isOpen} onClose={closeModal} fullWidth maxWidth="md">
-        {/*<Dialog open={isOpen} onClose={handleCloseModal} fullWidth maxWidth="md">*/}
+            {/*<Dialog open={isOpen} onClose={handleCloseModal} fullWidth maxWidth="md">*/}
             {/*<DialogTitle>{initialWork ? 'Edit Work' : 'Add New Work'}</DialogTitle>*/}
             {/*<DialogTitle>{initialWork ? 'לערוך עבודה' : 'הוספת עבודה'}</DialogTitle>*/}
             <DialogTitle>
@@ -235,9 +235,9 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                         <IconButton
                             onClick={handleCommentsToggle}
                             size="small"
-                            sx={{ display: 'flex', alignItems: 'center', gap: '4px' }} // Add gap here
+                            sx={{display: 'flex', alignItems: 'center', gap: '4px'}} // Add gap here
                         >
-                            <ChatIcon  sx={{ color: 'red' }}  />
+                            <ChatIcon sx={{color: 'red'}}/>
                             <Box component="span">
                                 צ'אט
                             </Box>
@@ -256,7 +256,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 fullWidth
                                 margin="normal"
                                 error={!!errors.work_number}
-                                InputProps={{ readOnly: isRestrictedRole }}
+                                InputProps={{readOnly: isRestrictedRole}}
                                 helperText={errors.work_number?.message}
                             />
                         </Grid>
@@ -268,7 +268,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 fullWidth
                                 margin="normal"
                                 error={!!errors.project}
-                                InputProps={{ readOnly: isRestrictedRole }}
+                                InputProps={{readOnly: isRestrictedRole}}
                                 helperText={errors.project?.message}
                             />
                         </Grid>
@@ -356,7 +356,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 InputLabelProps={{shrink: true}}
                                 error={!!errors.start_date}
                                 helperText={errors.start_date?.message}
-                                InputProps={{ readOnly: isRestrictedRole }}
+                                InputProps={{readOnly: isRestrictedRole}}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -370,7 +370,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 InputLabelProps={{shrink: true}}
                                 error={!!errors.due_end_date}
                                 helperText={errors.due_end_date?.message}
-                                InputProps={{ readOnly: isRestrictedRole }}
+                                InputProps={{readOnly: isRestrictedRole}}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -384,7 +384,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 InputLabelProps={{shrink: true}}
                                 error={!!errors.due_end_date}
                                 helperText={errors.due_end_date?.message}
-                                InputProps={{ readOnly: isRestrictedRole }}
+                                InputProps={{readOnly: isRestrictedRole}}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -398,7 +398,10 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
 
                                 >
                                     {workStatuses.map((status) => (
-                                        <MenuItem key={status.code} value={status.code}>
+                                        <MenuItem key={status.code}
+                                                  value={status.code}
+                                                  disabled={!status.chosable}
+                                                                        >
                                             {status.label}
                                         </MenuItem>
                                     ))}
@@ -421,7 +424,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 // label="Location"
                                 fullWidth
                                 margin="normal"
-                                InputProps={{ readOnly: isRestrictedRole }}
+                                InputProps={{readOnly: isRestrictedRole}}
                                 error={!!errors.location_name}
                                 helperText={errors.location_name?.message}
                             />
@@ -488,7 +491,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                         fullWidth
                                         error={!!errors.quality_score}
                                         helperText={errors.quality_score?.message}
-                                        InputProps={{ readOnly: isRestrictedRole }}
+                                        InputProps={{readOnly: isRestrictedRole}}
                                     />
                                 </Grid>
                                 <Grid item xs={4}>
@@ -503,7 +506,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                         fullWidth
                                         error={!!errors.time_score}
                                         helperText={errors.time_score?.message}
-                                        InputProps={{ readOnly: isRestrictedRole }}
+                                        InputProps={{readOnly: isRestrictedRole}}
                                     />
                                 </Grid>
                                 <Grid item xs={4}>
@@ -518,7 +521,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                         fullWidth
                                         error={!!errors.cost_score}
                                         helperText={errors.cost_score?.message}
-                                        InputProps={{ readOnly: isRestrictedRole }}
+                                        InputProps={{readOnly: isRestrictedRole}}
                                     />
                                 </Grid>
                             </>
@@ -541,7 +544,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                         rows={3}
                                         error={!!errors.items?.[index]?.description}
                                         helperText={errors.items?.[index]?.description?.message}
-                                        InputProps={{ readOnly: isRestrictedRole }}
+                                        InputProps={{readOnly: isRestrictedRole}}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -553,7 +556,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                         type="number" // Set type to "number" for numeric input
                                         error={!!errors.items?.[index]?.section}
                                         helperText={errors.items?.[index]?.section?.message}
-                                        InputProps={{ readOnly: isRestrictedRole }}
+                                        InputProps={{readOnly: isRestrictedRole}}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -565,7 +568,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                         type="number" // Set type to "number" for numeric input
                                         error={!!errors.items?.[index]?.contract_amount}
                                         helperText={errors.items?.[index]?.contract_amount?.message}
-                                        InputProps={{ readOnly: isRestrictedRole }}
+                                        InputProps={{readOnly: isRestrictedRole}}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -577,7 +580,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                         type="number" // Set type to "number" for numeric input
                                         error={!!errors.items?.[index]?.actual_amount}
                                         helperText={errors.items?.[index]?.actual_amount?.message}
-                                        InputProps={{ readOnly: isRestrictedRole }}
+                                        InputProps={{readOnly: isRestrictedRole}}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -589,7 +592,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                         type="number" // Set type to "number" for numeric input
                                         error={!!errors.items?.[index]?.unit_cost}
                                         helperText={errors.items?.[index]?.unit_cost?.message}
-                                        InputProps={{ readOnly: isRestrictedRole }}
+                                        InputProps={{readOnly: isRestrictedRole}}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -607,7 +610,9 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                             {/*<MenuItem value="QUALITY_CONTROL">Quality Control</MenuItem>*/}
                                             {/*<MenuItem value="COMPLETED">Completed</MenuItem>*/}
                                             {workItemStatuses.map((status) => (
-                                                <MenuItem key={status.code} value={status.code}>
+                                                <MenuItem key={status.code}
+                                                          value={status.code}
+                                                          disabled={!status.chosable}>
                                                     {status.label}
                                                 </MenuItem>
                                             ))}
@@ -622,7 +627,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                         fullWidth
                                         error={!!errors.items?.[index]?.work_type}
                                         helperText={errors.items?.[index]?.work_type?.message}
-                                        InputProps={{ readOnly: isRestrictedRole }}
+                                        InputProps={{readOnly: isRestrictedRole}}
                                     />
                                 </Grid>
                             </Grid>
@@ -646,7 +651,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
 
                     {/*<DialogActions>*/}
                     {/*<DialogActions>*/}
-                    <DialogActions sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end', p: 2 }}>
+                    <DialogActions sx={{display: 'flex', gap: 1, justifyContent: 'flex-end', p: 2}}>
                         {/*<Button onClick={closeModal}>Cancelז</Button>*/}
                         {/*<Button variant="contained" onClick={closeModal}>בטל</Button>*/}
 
