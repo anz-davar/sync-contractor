@@ -160,6 +160,7 @@ export const WorkTable = ({ isManager = false, data, isDone = false ,onEdit, onD
         return columns.filter((column) => {
             console.log(column)
             if (column.selector === 'end_date' && !isDone) return false;
+            if (column.name === 'תאריך סיום' && !isDone) return false;
             if (user && ['CONTRACTOR', 'CONTRACTOR_VIEWER'].includes(user.role) && column.name === 'ציון קבלן') return false;
             return true;
         });
