@@ -8,9 +8,16 @@ import DataService from '../services/DataService';
 import {ContractorsChartWorst} from "../cmps/Dashboard/ContractorsChartWorst.jsx";
 
 export const Dashboard = () => {
+
+    const currentDate = new Date();
+    const firstDayOfYear = new Date(currentDate.getFullYear(), 0, 1);
+
+
     const [chart, setChart] = useState('costs');
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
+    // const [startDate, setStartDate] = useState(null);
+    // const [endDate, setEndDate] = useState(null);
+    const [startDate, setStartDate] = useState(firstDayOfYear);
+    const [endDate, setEndDate] = useState(currentDate);
     const [contractorId, setContractorId] = useState(null);
     const [contractors, setContractors] = useState([]);
     const [facilityName, setFacilityName] = useState(null);

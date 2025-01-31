@@ -99,6 +99,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
             project: work.project,
             manager: work.manager,
             facility: work.facility,
+            location_name: work.location_name,
             classification: work.classification || 'FAULT',
             status: work.status || 'PENDING_APPROVAL',
             quality_score: work.quality_score, // New field
@@ -129,6 +130,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
     const watchedManager = watch('manager');
     const watchedFacility = watch('facility');
     const watchedClassification = watch('classification');
+    const watchedLocationName = watch('location_name');
     const watchedStatus = watch('status');
 
     useEffect(() => {
@@ -214,6 +216,21 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
         closeModal();
         reset(defaultWork); // Clear the form when the modal closes
     };
+
+    const locationOptions = [
+        'קווי הולכה',
+        'בוצה משופעלת',
+        'שיקוע ראשוני',
+        'שיקוע חול',
+        'ת"ש בורגי + מגובים',
+        'ת"ש 74',
+        'מעכלים',
+        'קוגנרציה',
+        'אוגר גז',
+        'הסמכה',
+        'רחבת בוצה',
+        'אחר',
+    ];
 
     return (
         <Dialog open={isOpen} onClose={closeModal} fullWidth maxWidth="md">
@@ -417,17 +434,44 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                             </FormControl>
                         </Grid>
                         {/* Rest of your form fields... */}
+                        {/*<Grid item xs={12}>*/}
+                        {/*    <TextField*/}
+                        {/*        {...register("location_name", {required: "Location is required"})}*/}
+                        {/*        label="מיקום"*/}
+                        {/*        // label="Location"*/}
+                        {/*        fullWidth*/}
+                        {/*        margin="normal"*/}
+                        {/*        InputProps={{readOnly: isRestrictedRole}}*/}
+                        {/*        error={!!errors.location_name}*/}
+                        {/*        helperText={errors.location_name?.message}*/}
+                        {/*    />*/}
+                        {/*</Grid>*/}
                         <Grid item xs={12}>
-                            <TextField
-                                {...register("location_name", {required: "Location is required"})}
-                                label="מיקום"
-                                // label="Location"
-                                fullWidth
-                                margin="normal"
-                                InputProps={{readOnly: isRestrictedRole}}
-                                error={!!errors.location_name}
-                                helperText={errors.location_name?.message}
-                            />
+                            <FormControl fullWidth margin="normal" error={!!errors.location_name}>
+                                <InputLabel id="location-name-label">מיקום</InputLabel>
+                                <Select
+                                    {...register("location_name", { required: "Location is required" })}
+                                    labelId="location-name-label"
+                                    label="מיקום"
+                                    value={watchedLocationName || ''}
+                                    disabled={isRestrictedRole}
+                                    error={!!errors.location_name}
+                                >
+                                    <MenuItem value="" disabled>
+                                        בחר מיקום
+                                    </MenuItem>
+                                    {locationOptions.map((option) => (
+                                        <MenuItem key={option} value={option}>
+                                            {option}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                                {errors.location_name && (
+                                    <FormHelperText error>
+                                        {errors.location_name.message}
+                                    </FormHelperText>
+                                )}
+                            </FormControl>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
