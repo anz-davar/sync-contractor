@@ -162,6 +162,8 @@ export const WorkTable = ({ isManager = false, data, isDone = false ,onEdit, onD
             if (column.selector === 'end_date' && !isDone) return false;
             if (column.name === 'תאריך סיום' && !isDone) return false;
             if (user && ['CONTRACTOR', 'CONTRACTOR_VIEWER'].includes(user.role) && column.name === 'ציון קבלן') return false;
+            if (user && ['CONTRACTOR', 'CONTRACTOR_VIEWER'].includes(user.role) && column.name === 'שם קבלן') return false;
+            if (user && ['CONTRACTOR', 'CONTRACTOR_VIEWER'].includes(user.role) && column.name === 'טלפון  קבלן') return false;
             return true;
         });
     };
@@ -179,49 +181,6 @@ export const WorkTable = ({ isManager = false, data, isDone = false ,onEdit, onD
         }
     }
 
-
-    // const renderActionButtons = (row) => {
-    //     if (!user) return null;
-    //
-    //     const showEdit = !["CONTRACTOR_VIEWER"].includes(user.role);
-    //     const showDelete = !["CONTRACTOR", "PAYMENT_ADMIN", "CONTRACTOR_VIEWER"].includes(user.role);
-    //     const showChat = true; // You can add conditions here if needed
-    //
-    //     if (!showEdit && !showDelete && !showChat) {
-    //         return null;
-    //     }
-    //
-    //     return (
-    //         <Stack direction="row" spacing={1}>
-    //             {showChat && (
-    //                 <>
-    //                         {/*<IconButton onClick={() => setIsChatOpen(true)} size="small"> /!* Click opens dialog *!/*/}
-    //                         {/*    <ChatIcon />*/}
-    //                         {/*</IconButton>*/}
-    //                     <IconButton
-    //                         onClick={() => setIsChatOpen(true)}
-    //                         size="small"
-    //                         // id={`comment-icon-${row.id}`} // Unique ID is CRUCIAL
-    //                     >
-    //                         <ChatIcon />
-    //                     </IconButton>
-    //                     <WorkComments workId={row.id} setOpen={setIsChatOpen} open={isChatOpen} onClose={() => setIsChatOpen(false)} /> {/* Pass props */}
-    //                 </>
-    //             )}
-    //
-    //             {showEdit && (
-    //                 <IconButton onClick={() => handleEditClick(row)}>
-    //                     <EditIcon />
-    //                 </IconButton>
-    //             )}
-    //             {showDelete && (
-    //                 <IconButton onClick={() => handleDeleteClick(row)}>
-    //                     <DeleteIcon />
-    //                 </IconButton>
-    //             )}
-    //         </Stack>
-    //     );
-    // };
 
     const renderActionButtons = (row) => {
         if (!user) return null;
@@ -265,8 +224,8 @@ export const WorkTable = ({ isManager = false, data, isDone = false ,onEdit, onD
 
 
     if (!data || data.length === 0)
-        // return <p>אין מידע להצגה</p>;
-        return <p> </p>;
+        return <p>אין מידע להצגה</p>;
+        // return <p> </p>;
     console.log(data);
     console.log('data');
     return (
