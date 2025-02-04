@@ -15,7 +15,8 @@ import {
     Paper,
     Select,
     TextField,
-    Typography
+    Typography,
+    Slider
 } from '@mui/material';
 import DataService from "../../services/dataService.js";
 import WorkComments from "../Management/WorkComments.jsx";
@@ -53,6 +54,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
         quality_score: null, // New field
         time_score: null,    // New field
         cost_score: null,    // New field
+        completion_percentage: 0,
         items: [{
             section: 1,
             description: '',
@@ -105,6 +107,7 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
             quality_score: work.quality_score, // New field
             time_score: work.time_score,    // New field
             cost_score: work.cost_score,    // New field
+            completion_percentage: work.completion_percentage,
             items: work.items.map(item => ({
                 ...item,
                 section: Number(item.section),
@@ -473,6 +476,32 @@ const NewWorkModal = ({isOpen, closeModal, onSubmit, initialWork}) => {
                                 )}
                             </FormControl>
                         </Grid>
+                        <Grid item xs={12}>
+                            <Typography gutterBottom>אחוזי השלמה</Typography>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                <Slider
+                                    value={watch('completion_percentage') || 0}
+                                    {...register('completion_percentage')}
+                                    onChange={(_, value) => setValue('completion_percentage', value)}
+                                    min={0}
+                                    max={100}
+                                    step={5}
+                                    disabled={isRestrictedRole}
+                                    // valueLabelDisplay="on"
+                                    marks
+                                    sx={{
+                                        '& .MuiSlider-valueLabelOpen': {
+                                            backgroundColor: 'primary.main',
+                                            color: 'white'
+                                        }
+                                    }}
+                                />
+                                <Typography variant="body2" sx={{ minWidth: 50, textAlign: 'center' }}>
+                                    {watch('completion_percentage') || 0}%
+                                </Typography>
+                            </Box>
+                        </Grid>
+
                         <Grid item xs={12}>
                             <TextField
                                 {...register("remarks")}
