@@ -101,7 +101,7 @@ export const WorkTable = ({isManager = false, data, isDone = false, onEdit, onDe
             name: 'פעולות',
             cell: (row) => renderActionButtons(row),
             width: '100px', // Adjust as needed
-            center: true,
+            center: 'true',
         },
     ] : [];
     const ExpandedComponent = ({data}) => {

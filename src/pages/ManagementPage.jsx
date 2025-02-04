@@ -181,24 +181,44 @@ export const ManagementPage = () => {
     return <div>Redirecting to login...</div>;
   }
 
+  // const selectStyle = {
+  //   minWidth: '170px',
+  //   height: '40px',
+  //   backgroundColor: 'rgba(255, 255, 255, 0.7)',
+  //   '& .MuiOutlinedInput-notchedOutline': {
+  //     borderColor: 'rgba(0, 0, 0, 0.2)',
+  //   },
+  //   '&:hover .MuiOutlinedInput-notchedOutline': {
+  //     borderColor: 'rgba(0, 0, 0, 0.5)',
+  //   },
+  //   '& .MuiSelect-icon': {
+  //     color: 'rgba(0, 0, 0, 0.5)'
+  //   }
+  // };
+  //
+  // const labelStyle = {
+  //   color: 'rgba(0, 0, 0, 0.5)'
+  // }
   const selectStyle = {
     minWidth: '170px',
     height: '40px',
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
-    '& .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'rgba(0, 0, 0, 0.2)',
+    '& .MuiOutlinedInputRoot': {
+      '& .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'rgba(0, 0, 0, 0.2)',
+      },
+      '&:hover .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'rgba(0, 0, 0, 0.5)',
+      },
     },
-    '&:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'rgba(0, 0, 0, 0.5)',
-    },
-    '& .MuiSelect-icon': {
+    '& .MuiSelectIcon': {
       color: 'rgba(0, 0, 0, 0.5)'
     }
   };
 
   const labelStyle = {
     color: 'rgba(0, 0, 0, 0.5)'
-  }
+  };
 
 
 
